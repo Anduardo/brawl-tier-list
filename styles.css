@@ -1,0 +1,511 @@
+:root {
+  --bg-azul-oscuro: #0c1e4a;
+  --bg-azul-medio: #14337a;
+  --panel-azul: #183d91;
+  --borde-negro: #090d16;
+  --amarillo-brawl: #ffc800;
+  --amarillo-sombra: #c98600;
+  --texto-blanco: #ffffff;
+
+  --rar-inicial: #94d2ff;
+  --rar-especial: #68fd58;
+  --rar-superespecial: #5ab3ff;
+  --rar-epico: #d850ff;
+  --rar-mitico: #fe3e4b;
+  --rar-legendario: #fff11e;
+  --rar-ultra: linear-gradient(135deg, #ff4d4d, #ffea00, #38ef7d, #00c6ff, #d850ff);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  color: var(--texto-blanco);
+  background-color: var(--bg-azul-oscuro);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(44, 102, 230, 0.35), transparent 50%),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 14px,
+      transparent 14px,
+      transparent 28px
+    );
+  min-height: 100vh;
+  padding: 18px;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .tier-badge, .nivel-numero, .stat-valor, .rol-btn {
+  font-family: "Lilita One", cursive, sans-serif;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 0 var(--borde-negro), 2px 0 0 var(--borde-negro), -2px 0 0 var(--borde-negro), 0 -2px 0 var(--borde-negro);
+}
+
+.brawl-header {
+  max-width: 1360px;
+  margin: 0 auto 18px;
+  background: var(--panel-azul);
+  border: 4px solid var(--borde-negro);
+  border-radius: 18px;
+  box-shadow: 0 6px 0 var(--borde-negro);
+  padding: 18px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.tag-temporada {
+  display: inline-block;
+  background: var(--amarillo-brawl);
+  color: #111;
+  font-weight: 900;
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 2px solid var(--borde-negro);
+  margin-bottom: 6px;
+}
+
+.titulo-bloque h1 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: #fff;
+}
+
+.contador-caja {
+  background: #0d2254;
+  border: 3px solid var(--borde-negro);
+  border-radius: 12px;
+  padding: 8px 14px;
+  text-align: center;
+}
+
+.contador-caja span {
+  display: block;
+  font-family: "Lilita One", cursive;
+  font-size: 1.3rem;
+  color: var(--amarillo-brawl);
+}
+
+.contador-caja small {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #b7cdfc;
+}
+
+.barra-controles {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.brawl-input,
+.brawl-select {
+  background: #0c1d47;
+  color: #fff;
+  border: 3px solid var(--borde-negro);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-height: 44px;
+}
+
+.brawl-input {
+  flex: 1 1 220px;
+}
+
+.brawl-input::placeholder {
+  color: #8ba8e8;
+}
+
+.filtros-rol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rol-btn {
+  background: #2252bd;
+  color: #fff;
+  border: 3px solid var(--borde-negro);
+  box-shadow: 0 3px 0 var(--borde-negro);
+  border-radius: 10px;
+  padding: 8px 14px;
+  min-height: 40px;
+  font-size: 0.92rem;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform 0.1s ease;
+}
+
+.rol-btn:hover {
+  transform: translateY(-2px);
+}
+
+.rol-btn.activo {
+  background: var(--amarillo-brawl);
+  color: #fff;
+  box-shadow: 0 3px 0 var(--amarillo-sombra);
+}
+
+.layout-principal {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.tier-board {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tier-row {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  min-height: 104px;
+  background: #10275e;
+  border: 4px solid var(--borde-negro);
+  border-radius: 16px;
+  box-shadow: 0 5px 0 var(--borde-negro);
+  overflow: hidden;
+}
+
+.tier-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: #fff;
+  border-right: 4px solid var(--borde-negro);
+}
+
+.tier-s { background: #ff3b4e; }
+.tier-a { background: #ff8c1a; }
+.tier-b { background: #ffd000; }
+.tier-c { background: #38d958; }
+.tier-d { background: #38a8ff; }
+
+.tier-slots {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  gap: 10px;
+  align-content: start;
+}
+
+.brawler-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1c449e;
+  border: 3px solid var(--borde-negro);
+  border-radius: 12px;
+  box-shadow: 0 4px 0 var(--borde-negro);
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  color: #fff;
+  transition: transform 0.12s ease;
+}
+
+.brawler-card:hover {
+  transform: translateY(-3px) scale(1.03);
+  border-color: var(--amarillo-brawl);
+}
+
+.card-rareza-franja {
+  width: 100%;
+  height: 7px;
+  border-bottom: 2px solid var(--borde-negro);
+}
+
+.rar-Inicial { background: var(--rar-inicial); }
+.rar-Especial { background: var(--rar-especial); }
+.rar-Superespecial { background: var(--rar-superespecial); }
+.rar-Épico { background: var(--rar-epico); }
+.rar-Mítico { background: var(--rar-mitico); }
+.rar-Legendario { background: var(--rar-legendario); }
+.rar-Ultralegendario { background: var(--rar-ultra); }
+
+.brawler-avatar {
+  width: 62px;
+  height: 62px;
+  object-fit: cover;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 2px solid var(--borde-negro);
+  background: #0d204d;
+}
+
+.brawler-card-nombre {
+  width: 100%;
+  text-align: center;
+  font-family: "Lilita One", cursive;
+  font-size: 0.84rem;
+  padding: 5px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1.5px 0 var(--borde-negro);
+}
+
+.brawler-inspector {
+  background: var(--panel-azul);
+  border: 4px solid var(--borde-negro);
+  border-radius: 18px;
+  box-shadow: 0 6px 0 var(--borde-negro);
+  padding: 18px;
+  position: sticky;
+  top: 20px;
+}
+
+.wiki-vacio {
+  text-align: center;
+  padding: 32px 10px;
+}
+
+.emblema-estrella {
+  font-size: 3.2rem;
+  color: var(--amarillo-brawl);
+  text-shadow: 0 4px 0 var(--borde-negro);
+  margin-bottom: 8px;
+}
+
+.wiki-vacio p {
+  color: #c7d9ff;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+.ficha-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #0e2459;
+  border: 3px solid var(--borde-negro);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.ficha-retrato {
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 3px solid var(--borde-negro);
+  object-fit: cover;
+  background: #1a3c8c;
+}
+
+.ficha-rareza-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: #111;
+  border: 2px solid var(--borde-negro);
+}
+
+.ficha-titulos h2 {
+  font-size: clamp(1.25rem, 3.5vw, 1.65rem);
+  margin: 2px 0;
+}
+
+.ficha-rol-tag {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #b7cdfc;
+}
+
+.ficha-tier-pill {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: var(--amarillo-brawl);
+  color: #fff;
+  font-family: "Lilita One", cursive;
+  font-size: 1.4rem;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 3px solid var(--borde-negro);
+  text-shadow: 0 2px 0 var(--borde-negro);
+}
+
+.nivel-selector-caja {
+  background: #0d204d;
+  border: 3px solid var(--borde-negro);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.nivel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.nivel-header label {
+  font-weight: 900;
+  font-size: 0.8rem;
+  color: #b7cdfc;
+}
+
+.nivel-numero {
+  background: #d946ef;
+  padding: 3px 10px;
+  border-radius: 8px;
+  border: 2px solid var(--borde-negro);
+  font-size: 0.95rem;
+}
+
+#slider-nivel {
+  width: 100%;
+  height: 24px;
+  accent-color: var(--amarillo-brawl);
+  cursor: pointer;
+}
+
+.nivel-marcas {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8ba8e8;
+  margin-top: 2px;
+}
+
+.brawl-stats-lista {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.stat-item {
+  background: #0d204d;
+  border: 3px solid var(--borde-negro);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #b7cdfc;
+  margin-bottom: 2px;
+}
+
+.stat-valor {
+  font-size: 1.25rem;
+  color: var(--amarillo-brawl);
+}
+
+.consejo-caja {
+  background: #0d204d;
+  border: 3px solid var(--borde-negro);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.consejo-caja h4 {
+  font-size: 0.78rem;
+  color: var(--amarillo-brawl);
+  margin-bottom: 4px;
+}
+
+.consejo-caja p {
+  font-size: 0.9rem;
+  color: #e2ecff;
+  line-height: 1.45;
+}
+
+.oculto {
+  display: none;
+}
+
+/* TABLET Y MÓVIL */
+@media (max-width: 960px) {
+  .layout-principal {
+    grid-template-columns: 1fr;
+  }
+
+  .brawler-inspector {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 10px;
+  }
+
+  .brawl-header,
+  .brawler-inspector {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .brawl-select {
+    width: 100%;
+  }
+
+  /* Fila de roles deslizable con el dedo en teléfono */
+  .filtros-rol {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tier-row {
+    grid-template-columns: 48px 1fr;
+    min-height: 92px;
+  }
+
+  .tier-badge {
+    font-size: 1.6rem;
+  }
+
+  .tier-slots {
+    grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .brawler-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .brawler-card-nombre {
+    font-size: 0.76rem;
+  }
+}

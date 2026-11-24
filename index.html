@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brawl Stars Tier List &amp; Wiki (PC y Móvil)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Rubik:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="brawl-header">
+    <div class="header-top">
+      <div class="titulo-bloque">
+        <span class="tag-temporada">BRAWL WIKI · PC &amp; MÓVIL</span>
+        <h1>TIER LIST &amp; BRAWL DEX</h1>
+      </div>
+      <div class="contador-caja">
+        <span id="contador-brawlers">108 / 108</span>
+        <small>BRAWLERS</small>
+      </div>
+    </div>
+
+    <div class="barra-controles">
+      <input
+        type="search"
+        id="buscador"
+        class="brawl-input"
+        placeholder="Buscar Brawler..."
+        aria-label="Buscar Brawler"
+      />
+
+      <select id="filtro-tier" class="brawl-select" aria-label="Filtrar por Tier">
+        <option value="todos">TIER: TODOS</option>
+        <option value="S">TIER S</option>
+        <option value="A">TIER A</option>
+        <option value="B">TIER B</option>
+        <option value="C">TIER C</option>
+        <option value="D">TIER D</option>
+      </select>
+
+      <select id="filtro-rareza" class="brawl-select" aria-label="Filtrar por Rareza">
+        <option value="todos">RAREZA: TODAS</option>
+        <option value="Inicial">Inicial</option>
+        <option value="Especial">Especial</option>
+        <option value="Superespecial">Superespecial</option>
+        <option value="Épico">Épico</option>
+        <option value="Mítico">Mítico</option>
+        <option value="Legendario">Legendario</option>
+        <option value="Ultralegendario">Ultralegendario</option>
+      </select>
+    </div>
+
+    <div class="filtros-rol" role="group" aria-label="Filtrar por rol">
+      <button class="rol-btn activo" data-rol="todos">TODOS</button>
+      <button class="rol-btn" data-rol="Asesino">ASESINO</button>
+      <button class="rol-btn" data-rol="Control">CONTROL</button>
+      <button class="rol-btn" data-rol="Tanque">TANQUE</button>
+      <button class="rol-btn" data-rol="Destructor">DESTRUCTOR</button>
+      <button class="rol-btn" data-rol="Tirador">TIRADOR</button>
+      <button class="rol-btn" data-rol="Apoyo">APOYO</button>
+      <button class="rol-btn" data-rol="Artillería">ARTILLERÍA</button>
+    </div>
+  </header>
+
+  <main class="layout-principal">
+    <section class="tier-board" aria-label="Tier List de Brawl Stars">
+      <div class="tier-row">
+        <div class="tier-badge tier-s">S</div>
+        <div class="tier-slots" data-tier="S"></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-badge tier-a">A</div>
+        <div class="tier-slots" data-tier="A"></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-badge tier-b">B</div>
+        <div class="tier-slots" data-tier="B"></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-badge tier-c">C</div>
+        <div class="tier-slots" data-tier="C"></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-badge tier-d">D</div>
+        <div class="tier-slots" data-tier="D"></div>
+      </div>
+    </section>
+
+    <aside class="brawler-inspector" id="wiki-panel">
+      <div id="wiki-vacio" class="wiki-vacio">
+        <div class="emblema-estrella">★</div>
+        <h2>SELECCIONA UN BRAWLER</h2>
+        <p>Toca o haz clic en cualquier carta para ver su rareza y estadísticas del <strong>Nivel 1 al 11</strong>.</p>
+      </div>
+
+      <div id="wiki-detalle" class="oculto">
+        <div class="ficha-banner" id="ficha-banner">
+          <img id="wiki-img" src="" alt="" class="ficha-retrato" />
+          <div class="ficha-titulos">
+            <span class="ficha-rareza-tag" id="wiki-rareza">RAREZA</span>
+            <h2 id="wiki-nombre">BRAWLER</h2>
+            <span class="ficha-rol-tag" id="wiki-rol">ROL</span>
+          </div>
+          <div class="ficha-tier-pill" id="wiki-tier">S</div>
+        </div>
+
+        <div class="nivel-selector-caja">
+          <div class="nivel-header">
+            <label for="slider-nivel">NIVEL DE FUERZA</label>
+            <span class="nivel-numero" id="texto-nivel">FUERZA 11</span>
+          </div>
+          <input type="range" id="slider-nivel" min="1" max="11" value="11" />
+          <div class="nivel-marcas">
+            <span>1</span><span>3</span><span>5</span><span>7</span><span>9</span><span>11</span>
+          </div>
+        </div>
+
+        <div class="brawl-stats-lista">
+          <div class="stat-item stat-salud">
+            <span class="stat-label">❤️ SALUD</span>
+            <strong class="stat-valor" id="stat-salud">0</strong>
+          </div>
+          <div class="stat-item stat-ataque">
+            <span class="stat-label">⚔️ ATAQUE BASE</span>
+            <strong class="stat-valor" id="stat-ataque">0</strong>
+          </div>
+          <div class="stat-item stat-super">
+            <span class="stat-label">💀 SÚPER</span>
+            <strong class="stat-valor" id="stat-super">0</strong>
+          </div>
+          <div class="stat-item stat-velocidad">
+            <span class="stat-label">⚡ VELOCIDAD</span>
+            <strong class="stat-valor" id="stat-velocidad">Normal</strong>
+          </div>
+        </div>
+
+        <div class="consejo-caja">
+          <h4>ESTRATEGIA &amp; MECÁNICA</h4>
+          <p id="wiki-nota"></p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
